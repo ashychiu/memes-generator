@@ -9,7 +9,7 @@ const ImageList = (props) => {
         console.log(item.url);
         return (
           <div>
-            <Card item={item.name} image={item.url} />
+            <Card key={item.id} item={item.name} image={item.url} />
             {/* <p>{item.name}</p>;
             <img src={item.url} width="300px" />; */}
           </div>
