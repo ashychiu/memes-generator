@@ -3,6 +3,7 @@ import ImageList from "../ImageList/ImageList";
 import { Component } from "react";
 import "./MemePage.scss";
 import addCaption from "../../assets/images/add-caption.png";
+import { Link } from "react-router-dom";
 
 class MemePage extends Component {
   state = {
@@ -22,6 +23,9 @@ class MemePage extends Component {
     e.preventDefault();
     console.log("target", e.target.userInput.value);
     const data = e.target.userInput.value;
+    if (!e.target.userInput.value) {
+      alert("Please type something...");
+    }
     if (this.validateData) {
       this.setState({ userInput: data });
       const caption = document.querySelector(".caption__text");
@@ -47,7 +51,7 @@ class MemePage extends Component {
           <img className="caption__image" src={meme.url} />
           <p className="caption__text">{}</p>
 
-          <label htmlFor="text-box1">Type your caption here:</label>
+          <label htmlFor="text-box1">Type here ...</label>
           <input
             name="userInput"
             // value= {this.state.userInput}
@@ -56,6 +60,9 @@ class MemePage extends Component {
             onChange={this.handleChange}
           />
           <button className="caption__button">Generate meme</button>
+          <Link to="/" className="caption__goback">
+            Go back
+          </Link>
         </div>
       </form>
     );
