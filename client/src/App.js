@@ -2,6 +2,9 @@ import "./App.css";
 import axios from "axios";
 import React, { Component } from "react";
 import ImageList from "./components/ImageList/ImageList";
+import { BrowserRouter , Route, Switch} from "react-router-dom";
+import MemePage from './components/MemePage/MemePage';
+
 
 class App extends Component {
   state = {
@@ -20,9 +23,36 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <ImageList list={this.state.imageList} />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          {/* <Route path='/' exact render={(renderProps) => {
+           <ImageList
+           list={this.state.imageList}
+           {...renderProps}
+           /> */}
+           
+          {/* }}/> */}
+          <Route path='/' exact>
+            <ImageList list={this.state.imageList}/>
+          </Route>
+
+          <Route path="/meme/:memeId" render={(routerProps) => {
+            return <MemePage
+            {...routerProps}
+            list={this.state.imageList}
+            />
+          }}
+           />
+           
+            
+           
+           
+         
+
+          
+        </Switch>
+      </BrowserRouter>
+      
     );
   }
 }
