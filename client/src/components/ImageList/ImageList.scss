@@ -1,0 +1,17 @@
+.list {
+  &__container {
+    width: 100%;
+    background-color: #ffc1d7;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+  }
+  &__header-image {
+    width: 100%;
+  }
+  &__choose-image {
+    width: 100%;
+    padding-top: 50px;
+  }
+}
