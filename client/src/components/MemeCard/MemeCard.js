@@ -10,7 +10,7 @@ const Card = (props) => {
         <img className="card__image" src={props.image} />
       </div>
     </div>
-  );
+
 };
 
-export default Card;
+export default MemeCard;

@@ -7,16 +7,16 @@ import MemePage from "./components/MemePage/MemePage";
 
 class App extends Component {
   state = {
-    imageList: [],
+    memesList: [],
   };
 
   componentDidMount() {
     axios.get("http://localhost:8080/memes").then((response) => {
       console.log("before data return:", response.data);
       this.setState({
-        imageList: response.data,
+        memesList: response.data,
       });
-      console.log("after data return:", this.state.imageList);
+      console.log("after data return:", this.state.memesList);
     });
   }
 
@@ -25,21 +25,21 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           {/* <Route path='/' exact render={(renderProps) => {
-           <ImageList
-           list={this.state.imageList}
+           <memesList
+           list={this.state.memesList}
            {...renderProps}
            /> */}
 
           {/* }}/> */}
           <Route path="/" exact>
-            <MemesList list={this.state.imageList} />
+            <MemesList list={this.state.memesList} />
           </Route>
 
           <Route
             path="/meme/:memeId"
             render={(routerProps) => {
-              return this.state.imageList.length ? (
-                <MemePage {...routerProps} list={this.state.imageList} />
+              return this.state.memesList.length ? (
+                <MemePage {...routerProps} list={this.state.memesList} />
               ) : null;
             }}
           />

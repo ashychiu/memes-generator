@@ -5,7 +5,7 @@ import "./MemesList.scss";
 import headerImage from "../../assets/images/home-header.png";
 import chooseMeme from "../../assets/images/choose-meme.png";
 
-const ImageList = (props) => {
+const memesList = (props) => {
   console.log("props:", props.list);
   return (
     <div className="list__container">
@@ -26,4 +26,4 @@ const ImageList = (props) => {
   );
 };
 
-export default ImageList;
+export default MemesList;
