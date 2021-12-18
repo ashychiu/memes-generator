@@ -1,7 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import React, { Component } from "react";
-import ImageList from "./components/ImageList/ImageList";
+import MemesList from "./components/MemesList/MemesList";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MemePage from "./components/MemePage/MemePage";
 
@@ -32,7 +32,7 @@ class App extends Component {
 
           {/* }}/> */}
           <Route path="/" exact>
-            <ImageList list={this.state.imageList} />
+            <MemesList list={this.state.imageList} />
           </Route>
 
           <Route

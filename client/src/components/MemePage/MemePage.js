@@ -1,5 +1,4 @@
 import React from "react";
-import ImageList from "../ImageList/ImageList";
 import { Component } from "react";
 import "./MemePage.scss";
 import addCaption from "../../assets/images/add-caption.png";
