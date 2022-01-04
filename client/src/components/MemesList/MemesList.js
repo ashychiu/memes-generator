@@ -5,12 +5,20 @@ import "./MemesList.scss";
 import headerImage from "../../assets/images/home-header.png";
 import chooseMeme from "../../assets/images/choose-meme.png";
 
-const memesList = (props) => {
+const MemesList = (props) => {
   console.log("props:", props.list);
   return (
     <div className="list__container">
-      <img className="list__header-image" src={headerImage} />
-      <img className="list__choose-image" src={chooseMeme} />
+      <img
+        className="list__header-image"
+        src={headerImage}
+        alt="Memenerator by Ashley and Miriam"
+      />
+      <img
+        className="list__choose-image"
+        src={chooseMeme}
+        alt="choose a meme background"
+      />
       {props.list.map((item) => {
         return (
           <Link to={`/meme/${item.id}`} key={item.id}>
