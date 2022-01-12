@@ -10,4 +10,4 @@ Usage
 
 To download this project and view it locally, run the following commands in your terminal:
 
-git clone [https://github.com/ashychiu/memes-generator.git | git@github.com:ashychiu/memes-generator.git] cd git-practice code .
+git clone git@github.com:ashychiu/memes-generator.git
