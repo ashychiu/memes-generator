@@ -1,71 +1,66 @@
-import React from "react";
-import { Component } from "react";
-import "./MemePage.scss";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import addCaption from "../../assets/images/add-caption.png";
-import { Link } from "react-router-dom";
+import "./MemePage.scss";
 
-class MemePage extends Component {
-  state = {
-    userInput: "",
-  };
-  validateData = () => {
-    const { userInput } = this.state;
-    if (!userInput) {
-      return false;
-    }
-  };
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+function MemePage({ list }) {
+  const { memeId } = useParams();
+  const [draft, setDraft] = useState("");
+  const [caption, setCaption] = useState("");
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("target", e.target.userInput.value);
-    const data = e.target.userInput.value;
-    if (!e.target.userInput.value) {
-      alert("Please type something...");
-    }
-    if (this.validateData) {
-      this.setState({ userInput: data });
-      const caption = document.querySelector(".caption__text");
-      caption.append(data);
-    }
-    console.log("input", data);
-    e.target.reset();
-    // alert("Generating your meme!");
-  };
+  const meme = list.find((item) => item.id === memeId);
 
-  render() {
-    console.log(this.handleSubmit);
-
-    console.log("meme", this.props);
-
-    let selectedMeme = this.props.match.params.memeId;
-    console.log(selectedMeme);
-    const meme = this.props.list.find((item) => item.id === selectedMeme);
+  if (!meme) {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="caption">
-          <img className="caption__add-caption" src={addCaption} />
-          <img className="caption__image" src={meme.url} />
-          <p className="caption__text">{}</p>
-
-          <label htmlFor="text-box1">Type here ...</label>
-          <input
-            name="userInput"
-            // value= {this.state.userInput}
-            id="text-box1"
-            type="text"
-            onChange={this.handleChange}
-          />
-          <button className="caption__button">Generate meme</button>
-          <Link to="/" className="caption__goback">
-            Go back
-          </Link>
-        </div>
-      </form>
+      <div className="caption">
+        <p>Meme not found.</p>
+        <Link to="/" className="caption__goback">
+          Go back
+        </Link>
+      </div>
     );
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!draft.trim()) {
+      alert("Please type something...");
+      return;
+    }
+    setCaption(draft);
+    setDraft("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="caption">
+        <img
+          className="caption__add-caption"
+          src={addCaption}
+          alt="Add a caption"
+        />
+        <div className="caption__stage">
+          <img className="caption__image" src={meme.url} alt={meme.name} />
+          <p className="caption__text">{caption}</p>
+        </div>
+
+        <label htmlFor="text-box1">Type here ...</label>
+        <input
+          name="userInput"
+          id="text-box1"
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+        />
+        <button className="caption__button" type="submit">
+          Generate meme
+        </button>
+        <Link to="/" className="caption__goback">
+          Go back
+        </Link>
+      </div>
+    </form>
+  );
 }
 
 export default MemePage;

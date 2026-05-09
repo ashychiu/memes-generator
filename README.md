@@ -1,13 +1,61 @@
-Description
+# Memenerator
 
-The purpose of this project is to participate in pair programming to showcase what have been learned so far 8 weeks into Brainstation's Web Development Bootcamp. Including CSS by using SASS & flex box, React JavaScript with Router & API request with axios, as well as Node.js to build API server.
+Pick a meme background and overlay your own caption.
 
-Background
+## Stack
 
-Memenerator allows users to choose a meme background and add custom text on it.
+- **Client**: React 18, react-router-dom 6, Sass, axios. Bootstrapped with Create React App.
+- **Server**: Node + Express, JSON-file backed.
 
-Usage
+## Prerequisites
 
-To download this project and view it locally, run the following commands in your terminal:
+- Node 18+ (tested on 22)
+- npm 9+
 
-git clone [https://github.com/ashychiu/memes-generator.git | git@github.com:ashychiu/memes-generator.git] cd git-practice code .
+## Setup
+
+```bash
+git clone git@github.com:ashychiu/memes-generator.git
+cd memes-generator
+```
+
+### Server
+
+```bash
+cd server
+cp .env.example .env       # edit if you want to change PORT or allowed CLIENT_URL
+npm install
+npm run dev                # nodemon on :8080  (or: npm start)
+```
+
+### Client
+
+```bash
+cd client
+cp .env.example .env       # optional; App.js falls back to http://localhost:8080
+npm install
+npm start                  # opens http://localhost:3000
+```
+
+## Project layout
+
+```
+memes-generator/
+├── client/                  React app
+│   └── src/
+│       ├── App.js           Routes + memes fetch
+│       └── components/
+│           ├── MemesList/   Home grid of memes
+│           ├── MemeCard/    Single thumbnail
+│           └── MemePage/    Caption editor
+└── server/
+    ├── index.js             Express app
+    ├── routes/memes.js      GET /memes
+    └── data/memes.json      Seed data
+```
+
+## API
+
+| Method | Path     | Description                |
+| ------ | -------- | -------------------------- |
+| GET    | `/memes` | Returns the list of memes. |
