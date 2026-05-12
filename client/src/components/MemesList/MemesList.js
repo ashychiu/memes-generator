@@ -1,12 +1,10 @@
-import React from "react";
-import MemeCard from "../MemeCard/MemeCard";
 import { Link } from "react-router-dom";
-import "./MemesList.scss";
+import MemeCard from "../MemeCard/MemeCard";
 import headerImage from "../../assets/images/home-header.png";
 import chooseMeme from "../../assets/images/choose-meme.png";
+import "./MemesList.scss";
 
-const MemesList = (props) => {
-  console.log("props:", props.list);
+function MemesList({ list }) {
   return (
     <div className="list__container">
       <img
@@ -17,21 +15,15 @@ const MemesList = (props) => {
       <img
         className="list__choose-image"
         src={chooseMeme}
-        alt="choose a meme background"
+        alt="Choose a meme background"
       />
-      {props.list.map((item) => {
-        return (
-          <Link to={`/meme/${item.id}`} key={item.id}>
-            <div>
-              <MemeCard item={item.name} image={item.url} />
-              {/* <p>{item.name}</p>;
-            <img src={item.url} width="300px" />; */}
-            </div>
-          </Link>
-        );
-      })}
+      {list.map((item) => (
+        <Link to={`/meme/${item.id}`} key={item.id}>
+          <MemeCard name={item.name} image={item.url} />
+        </Link>
+      ))}
     </div>
   );
-};
+}
 
 export default MemesList;

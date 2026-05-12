@@ -1,51 +1,35 @@
 import "./App.css";
 import axios from "axios";
-import React, { Component } from "react";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MemesList from "./components/MemesList/MemesList";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MemePage from "./components/MemePage/MemePage";
 
-class App extends Component {
-  state = {
-    memesList: [],
-  };
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
-  componentDidMount() {
-    axios.get("http://localhost:8080/memes").then((response) => {
-      console.log("before data return:", response.data);
-      this.setState({
-        memesList: response.data,
-      });
-      console.log("after data return:", this.state.memesList);
-    });
+function App() {
+  const [memesList, setMemesList] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/memes`)
+      .then((response) => setMemesList(response.data))
+      .catch((err) => setError(err.message));
+  }, []);
+
+  if (error) {
+    return <p>Failed to load memes: {error}</p>;
   }
 
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          {/* <Route path='/' exact render={(renderProps) => {
-           <memesList
-           list={this.state.memesList}
-           {...renderProps}
-           /> */}
-
-          {/* }}/> */}
-          <Route path="/" exact>
-            <MemesList list={this.state.memesList} />
-          </Route>
-
-          <Route
-            path="/meme/:memeId"
-            render={(routerProps) => {
-              return this.state.memesList.length ? (
-                <MemePage {...routerProps} list={this.state.memesList} />
-              ) : null;
-            }}
-          />
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MemesList list={memesList} />} />
+        <Route path="/meme/:memeId" element={<MemePage list={memesList} />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
 export default App;

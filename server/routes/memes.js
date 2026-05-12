@@ -1,16 +1,17 @@
 const express = require("express");
+const fs = require("fs/promises");
+const path = require("path");
+
 const memesRouter = express.Router();
-const fs = require("fs");
+const MEMES_FILE = path.join(__dirname, "..", "data", "memes.json");
 
-const readData = () => {
-  const memesData = fs.readFileSync("./data/memes.json");
-  return JSON.parse(memesData);
-};
-
-memesRouter.get("/", (req, res) => {
-  const memesData = readData();
-  console.log(memesData);
-  return res.status(200).json(memesData);
+memesRouter.get("/", async (req, res, next) => {
+  try {
+    const raw = await fs.readFile(MEMES_FILE, "utf-8");
+    res.status(200).json(JSON.parse(raw));
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = memesRouter;
