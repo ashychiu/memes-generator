@@ -7,8 +7,17 @@
     flex-wrap: wrap;
     padding-bottom: 50px;
   }
+
+  &__container a {
+    flex: 0 0 calc(33.333% - 16px);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    text-decoration: none;
+  }
+
   &__header-image {
-    width: 75%;
+    width: 50%;
   }
   &__choose-image {
     width: 80%;
