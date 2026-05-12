@@ -1,0 +1,20 @@
+$impact-font: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+$accent-pink: #ffc1d7;
+$accent-blue: #142cc0;
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 24px 0;
+  background-color: $accent-pink;
+  font-family: $impact-font;
+  letter-spacing: 4px;
+  color: $accent-blue;
+}
+
+.footer__link {
+  text-decoration: none;
+  margin-right: 32px;
+}

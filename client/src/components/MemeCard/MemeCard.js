@@ -1,4 +1,4 @@
-import "./MemeCard.scss";
+import './MemeCard.scss';
 
 function MemeCard({ name, image }) {
   return (
